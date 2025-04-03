@@ -12,47 +12,52 @@ class AppleLogin extends LoginSystem {
   void init() async {}
 
   Future<UserCredential?> login() async {
-    try {
-      emit(MProgress());
+  try {
+    emit(MProgress());
 
-      final AuthorizationCredentialAppleID appleIdCredential =
-          await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-      );
+    final appleIdCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
 
-      oAuthProvider = OAuthProvider('apple.com');
-      if (oAuthProvider != null) {
-        credential = oAuthProvider!.credential(
-          idToken: appleIdCredential.identityToken,
-          accessToken: appleIdCredential.authorizationCode,
-        );
+    print("Apple ID Token: ${appleIdCredential.identityToken}");
+    print("Apple Auth Code: ${appleIdCredential.authorizationCode}");
 
-        final UserCredential userCredential =
-            await firebaseAuth.signInWithCredential(credential!);
-
-        if (userCredential.additionalUserInfo!.isNewUser) {
-          final String givenName = appleIdCredential.givenName ?? "";
-          final String familyName = appleIdCredential.familyName ?? "";
-
-          await userCredential.user!
-              .updateDisplayName("$givenName $familyName");
-          await userCredential.user!.reload();
-        }
-
-        emit(MSuccess());
-
-        return userCredential;
-      }
+    if (appleIdCredential.identityToken == null ||
+        appleIdCredential.authorizationCode == null) {
+      emit(MFail("Missing Apple token or code"));
       return null;
-    } catch (e) {
-      print("apple error catch***${e.toString()}");
-      emit(MFail(e));
-      throw e;
     }
+
+    final oAuthProvider = OAuthProvider('apple.com');
+
+    final credential = oAuthProvider.credential(
+      idToken: appleIdCredential.identityToken,
+      accessToken: appleIdCredential.authorizationCode,
+    );
+
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (userCredential.additionalUserInfo?.isNewUser == true) {
+      final givenName = appleIdCredential.givenName ?? "";
+      final familyName = appleIdCredential.familyName ?? "";
+
+      await userCredential.user?.updateDisplayName("$givenName $familyName");
+      await userCredential.user?.reload();
+    }
+
+    emit(MSuccess());
+    return userCredential;
+  } catch (e) {
+    print("apple error catch***${e.toString()}");
+    emit(MFail(e));
+    return null;
   }
+}
+
 
   @override
   void onEvent(MLoginState state) {

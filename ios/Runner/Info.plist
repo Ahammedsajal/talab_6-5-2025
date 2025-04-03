@@ -20,12 +20,8 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-
-	<!-- ✅ Required for Google Sign-In -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -37,24 +33,14 @@
 			</array>
 		</dict>
 	</array>
-
-	<!-- ✅ Required for Apple Sign-In -->
-	<key>NSUserAuthenticationUsageDescription</key>
-	<string>We use Sign in with Apple to securely log you into the app.</string>
-
-	<!-- ✅ Firebase Manual Initialization -->
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
-
-	<!-- ✅ Google Ads App ID (demo/test ID) -->
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
-
-	<!-- ✅ Google Client ID -->
 	<key>GIDClientID</key>
-	<string>108180484089-i86oapgt2k55rvbloliguutja4ht9khm.apps.googleusercontent.com</string>
-
-	<!-- ✅ Required for Google/Apple and web linking -->
+	<string>	</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>sms</string>
@@ -64,11 +50,15 @@
 		<string>https</string>
 		<string>http</string>
 	</array>
-
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-
-	<!-- ✅ Permissions for common features -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera for adding ads images and user's profile picture.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -77,24 +67,23 @@
 	<string>This app uses your location to display relevant local ads and listings items.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We are using microphone to send audio messages in chat functionality.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library because we upload profile picture and ads images.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>We need access to add files to your photo library.</string>
-
-	<!-- ✅ Required for background fetch and notifications -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library because we upload profile picture and ads images.</string>
+	<key>NSUserAuthenticationUsageDescription</key>
+	<string>We use Sign in with Apple to securely log you into the app.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-
-	<!-- ✅ Interface support -->
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -108,17 +97,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-	<!-- ✅ Allow arbitrary network loads (e.g., Firebase hosting or custom backend) -->
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
-	</dict>
 </dict>
 </plist>
