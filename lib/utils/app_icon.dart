@@ -100,6 +100,8 @@ class AppIcons {
   static String phonePeIcon = _svgPath("payment/ic_phonepe");
   static String featuredAdsIcon = _svgPath("featured_Ad");
   static String verifiedIcon = _svgPath("verified");
+static const String whatsappPng = "assets/icons/whatsapp.png";
+
   static String editProfileIcon = _svgPath("edit_profile");
   static String cameraImageIcon = _svgPath("camera_image_attach");
   static String galleryImageIcon = _svgPath("gallery_image_attach");

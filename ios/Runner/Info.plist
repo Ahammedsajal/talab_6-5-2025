@@ -30,6 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.108180484089-i86oapgt2k55rvbloliguutja4ht9khm</string>
+				<string>app-1-108180484089-ios-366adeae02c80bc404d728</string>
 			</array>
 		</dict>
 	</array>
@@ -60,7 +61,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera for adding ads images and user's profile picture.</string>
+	<string>This app requires access to the camera for adding ads images and user&apos;s profile picture.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app uses your location to show relevant local ads and listings items.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

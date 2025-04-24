@@ -66,6 +66,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:photo_view/photo_view.dart';
 
 class AdDetailsScreen extends StatefulWidget {
   final ItemModel? model;
@@ -1740,7 +1742,7 @@ class AdDetailsScreenState extends CloudState<AdDetailsScreen> {
 //ImageView
   Widget setImageViewer() {
     return Container(
-      height: 250,
+      height: 369,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
       padding: const EdgeInsets.symmetric(vertical: 10),
       // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -2648,7 +2650,7 @@ class AdDetailsScreenState extends CloudState<AdDetailsScreen> {
         SizedBox(width: 10),
         if (model.contact != null && model.contact != "")
           setIconButtons(
-            assetName: AppIcons.chatNav, // WhatsApp icon
+            assetName: AppIcons.whatsappPng, // WhatsApp icon
             onTap: () {
               launchWhatsApp(model.contact!);
             },
@@ -2679,29 +2681,42 @@ void launchWhatsApp(String phoneNumber) async {
 }
 
   Widget setIconButtons({
-    required String assetName,
-    required void Function() onTap,
-    Color? color,
-    double? height,
-    double? width,
-  }) {
-    return Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: context.color.borderColor.darken(30))),
-        child: Padding(
-            padding: const EdgeInsets.all(5),
-            child: InkWell(
-                onTap: onTap,
-                child: SvgPicture.asset(
-                  assetName,
-                  colorFilter: color == null
-                      ? ColorFilter.mode(
-                          context.color.territoryColor, BlendMode.srcIn)
-                      : ColorFilter.mode(color, BlendMode.srcIn),
-                ))));
-  }
+  required String assetName,
+  required void Function() onTap,
+  Color? color,
+  double size = 20,
+}) {
+  return Container(
+    padding: const EdgeInsets.all(8),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: context.color.borderColor.darken(30)),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(5),
+      child: InkWell(
+        onTap: onTap,
+        child: assetName.endsWith('.png')
+            ? Image.asset(
+                assetName,
+                width: size,
+                height: size,
+                fit: BoxFit.contain,
+              )
+            : SvgPicture.asset(
+                assetName,
+                width: size,
+                height: size,
+                colorFilter: ColorFilter.mode(
+                  color ?? context.color.territoryColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+      ),
+    ),
+  );
+}
+
 
   Widget reportReason() {
     double bottomPadding = MediaQuery.of(context).viewInsets.bottom - 50;
