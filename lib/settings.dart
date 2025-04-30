@@ -30,8 +30,8 @@ class AppSettings {
   static const String androidPackageName = 'com.talab.white';
   static const String shareAppText = "Share this App";
 
-  static const String testUrl = "https://talab.qa";
-  static const String demoUrl = "https://talab.qa";
+  static const String testUrl = "https://admin.talab.qa";
+  static const String demoUrl = "https://admin.talab.qa";
 
   ///API Setting
 
